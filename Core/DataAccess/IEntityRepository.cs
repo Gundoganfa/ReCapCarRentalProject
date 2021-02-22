@@ -16,8 +16,6 @@ namespace Core.DataAccess
         // how to use expressions : https://www.youtube.com/watch?v=sLQBUfbaAqw 
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
         T Get(Expression<Func<T, bool>> filter);
-        //T Get(int id);
-        //T Get(string name);
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);

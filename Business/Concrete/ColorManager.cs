@@ -17,7 +17,7 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public IResult Insert(Color color)
+        public IResult Add(Color color)
         {
             _colorDal.Add(color);
             return new SuccessResult();

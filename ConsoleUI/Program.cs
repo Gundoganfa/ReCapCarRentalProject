@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using ConsoleUI.Interfaces;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
@@ -15,95 +16,16 @@ namespace ConsoleUI
             // carManager uses DAL methods fo manipulate data
 
             //CarManager carManager = new CarManager(new InMemoryCarDal());
-            CarManager carManager = new CarManager(new EfCarDal());
+            MainUI mainUI = new MainUI();
+            BrandUI brandUI = new BrandUI();
+            CarUI carUI = new CarUI();
 
-            List<Car> cars = carManager.GetAll().Data;
+            List<IUserInterface> userInterfaces = new List<IUserInterface> { brandUI, carUI };
 
-            Console.Clear();
-            while (true) // komut bekle
-            {
-                Console.WriteLine("1.Ekle");
-                Console.WriteLine("2.Listele");
-                Console.WriteLine("3.Sil");
-                Console.WriteLine("4.Brand ID'ye göre listele");
-                Console.WriteLine("5.Color ID'ye göre listele");
-                Console.WriteLine("6.Joini Listele");
-                Console.WriteLine("9.Ekranı Temizle");
-                Console.WriteLine("0.Bye");
-                int command = Convert.ToInt32(RequestDecimal());
-                if (command==0)
-                {
-                    break;
-                }
-
-
-                string tmp1;
-                int tmp2;
-                switch (command)
-                {
-                    case 1://yeni araç ekle
-                        Console.Clear();
-                        Console.WriteLine("Car Description:");
-                        tmp1 = Console.ReadLine();
-                        Console.WriteLine("Car Price:");
-                        tmp2 = Convert.ToInt32(Console.ReadLine());
-                        carManager.Insert(new Car { BrandId = 2, ColorId = 2, DailyPrice = tmp2, Description = tmp1, ModelYear = 2000 });
-                        break;
-                    case 2: //araçları listele
-                        Console.Clear();
-                        cars = carManager.GetAll().Data;
-                        foreach (var item in cars)
-                        {
-                            Console.WriteLine("Car Id:{0}\tCar Desc:{1}", item.CarId, item.Description);
-                        }
-                        break;
-                    case 3: //sil
-                        Console.WriteLine("Car Id:");
-                        tmp2 = Convert.ToInt32(Console.ReadLine());
-                        carManager.DeleteById(tmp2);
-                        break;
-
-                    case 4: //brand id'ye göre listele
-                        Console.Clear();
-                        Console.WriteLine("Brand Id:");
-                        var tmpBrandId = Convert.ToInt32(Console.ReadLine());
-                        cars = carManager.GetCarsByBrandId(tmpBrandId).Data;
-                        foreach (var item in cars)
-                        {
-                            Console.WriteLine(item.Description);
-                        }
-                        break;
-                    case 5: //color id'ye göre listele
-                        Console.Clear();
-                        Console.WriteLine("Color Id:");
-                        var tmpColorId = Convert.ToInt32(Console.ReadLine());
-                        cars = carManager.GetCarsByColorId(tmpColorId).Data;
-                        foreach (var item in cars)
-                        {
-                            Console.WriteLine(item.Description);
-                        }
-                        break;
-                    case 6: // join yaptığımız tabloyu listele
-                        foreach (var car in carManager.GetCarDetails().Data)
-                        {
-                            Console.WriteLine("Car Id:{0}\tCar Desc:{1}\tBrand:{2}\tColor:{3}", car.CarId, car.CarName, car.Brand, car.Color);
-                        }
-                        break;
-                    case 9:
-                        Console.Clear();
-                        break;
-                    default:
-                        Console.WriteLine("Unsupported Request!");
-                        break;
-                }
-            }
-        }
-        static decimal RequestDecimal()
-        {
-            decimal result;
-            while (!decimal.TryParse(Console.ReadLine(), out result));
-            return result;
-        }
-
+            mainUI.Show(userInterfaces);
+        }                
     }
 }
+
+
+//Müşteriler tablosu oluşturunuz. Customers-->UserId, CompanyName

@@ -18,7 +18,7 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public IResult Insert(Brand brand)
+        public IResult Add(Brand brand)
         {
             try
             {
