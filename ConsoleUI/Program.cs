@@ -19,8 +19,9 @@ namespace ConsoleUI
             MainUI mainUI = new MainUI();
             BrandUI brandUI = new BrandUI();
             CarUI carUI = new CarUI();
+            UserUI userUI = new UserUI();
 
-            List<IUserInterface> userInterfaces = new List<IUserInterface> { brandUI, carUI };
+            List<IUserInterface> userInterfaces = new List<IUserInterface> { brandUI, carUI, userUI };
 
             mainUI.Show(userInterfaces);
         }                

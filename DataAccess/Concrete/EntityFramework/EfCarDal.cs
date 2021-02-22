@@ -9,12 +9,12 @@ using System.Linq;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : EfEntityRepositoryBase<Car, CarSalesPortalDBContext>, ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, CarRentalPortalDBContext>, ICarDal
     {
         public List<CarDetailDto> GetCarDetails()
         {
             // IDisposable
-            using (CarSalesPortalDBContext context = new CarSalesPortalDBContext())
+            using (CarRentalPortalDBContext context = new CarRentalPortalDBContext())
             {
                 var result = from car in context.Cars
                              join color in context.Colors on car.ColorId equals color.ColorId

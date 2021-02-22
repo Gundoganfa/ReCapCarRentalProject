@@ -19,7 +19,6 @@ namespace ConsoleUI.Interfaces
         {
             int command;
             List<Car> cars = new List<Car> { null };
-            Car car = new Car();
 
             Console.Clear();
             do
@@ -34,46 +33,16 @@ namespace ConsoleUI.Interfaces
                 switch (command)
                 {
                     case 1:
-                        Console.Clear();
-                        Console.WriteLine("ARABA LISTESI");
-                        Console.WriteLine("#############\n");
-                        foreach (var item in cars)
-                        {
-                            Console.WriteLine("Id:"+item.CarId + "\tbrandId:" + item.BrandId+"\tcolorId:"+item.ColorId+"\tprice:"+item.DailyPrice+"\tDesc:"+item.Description);
-                        }
+                        ListCars(cars);
                         break;
                     case 2:
-                        Console.Clear();
-                        Console.WriteLine("ARABA EKLEME MENUSU");
-                        Console.WriteLine("###################\n");
-                        Console.WriteLine("ARABA Tanımı:");
-                        car.Description = Console.ReadLine();
-                        Console.WriteLine("brandId:");
-                        car.BrandId = (int)RequestDecimal();
-                        Console.WriteLine("colorId:");
-                        car.ColorId = (int)RequestDecimal();
-                        Console.WriteLine("Daily Price :");
-                        car.DailyPrice = (int)RequestDecimal();
-
-                        Console.WriteLine("Sonuç:" + carManager.Add(car).Message);
+                        AddCars();
                         break;
                     case 3:
-                        Console.Clear();
-                        Console.WriteLine("ARABA DUZELTME MENUSU");
-                        Console.WriteLine("#####################\n");
-                        Console.WriteLine("Mevcut ARABA Id'si:");
-                        car.CarId = Convert.ToInt32(RequestDecimal());
-                        Console.WriteLine("Güncellenmiş ARABA Adı:");
-                        car.Description = Console.ReadLine();
-                        Console.WriteLine("Sonuç:" + carManager.Update(car).Message);
+                        UpdateCar();
                         break;
                     case 4:
-                        Console.Clear();
-                        Console.WriteLine("ARABA SİLME MENUSU");
-                        Console.WriteLine("###################\n");
-                        Console.WriteLine("Silinecek Marka Id'si:");
-                        car.CarId = Convert.ToInt32(RequestDecimal());
-                        Console.WriteLine("Sonuç:" + carManager.DeleteById(car.CarId).Message);
+                        DeleteCar();
                         break;
                     default:
                         Console.WriteLine("Unsupported Request!");
@@ -81,6 +50,59 @@ namespace ConsoleUI.Interfaces
                 }
 
             } while (command != 0);
+
+            static void ListCars(List<Car> cars)
+            {
+                Console.Clear();
+                Console.WriteLine("ARABA LISTESI");
+                Console.WriteLine("#############\n");
+                foreach (var item in cars)
+                {
+                    Console.WriteLine("Id:" + item.CarId + "\tbrandId:" + item.BrandId + "\tcolorId:" + item.ColorId + "\tprice:" + item.DailyPrice + "\tDesc:" + item.Description);
+                }
+            }
+
+            void AddCars()
+            {
+                Console.Clear();
+                Console.WriteLine("ARABA EKLEME MENUSU");
+                Console.WriteLine("###################\n");
+                Console.WriteLine("ARABA Tanımı:");
+                Car carToAdd = new Car();
+                carToAdd.Description = Console.ReadLine();
+                Console.WriteLine("brandId:");
+                carToAdd.BrandId = (int)RequestDecimal();
+                Console.WriteLine("colorId:");
+                carToAdd.ColorId = (int)RequestDecimal();
+                Console.WriteLine("Daily Price :");
+                carToAdd.DailyPrice = (int)RequestDecimal();
+
+                Console.WriteLine("Sonuç:" + carManager.Add(carToAdd).Message);
+            }
+
+            void UpdateCar()
+            {
+                Console.Clear();
+                Console.WriteLine("ARABA DUZELTME MENUSU");
+                Console.WriteLine("#####################\n");
+                Console.WriteLine("Mevcut ARABA Id'si:");
+                Car carToUpdate = new Car();
+                carToUpdate.CarId = Convert.ToInt32(RequestDecimal());
+                carToUpdate = carManager.GetById(carToUpdate.CarId).Data;
+                Console.WriteLine("Güncellenmiş ARABA Adı:");
+                carToUpdate.Description = Console.ReadLine();
+                Console.WriteLine("Sonuç:" + carManager.Update(carToUpdate).Message);
+            }
+
+            void DeleteCar()
+            {
+                Console.Clear();
+                Console.WriteLine("ARABA SİLME MENUSU");
+                Console.WriteLine("###################\n");
+                Console.WriteLine("Silinecek Marka Id'si:");
+                int carId = Convert.ToInt32(RequestDecimal());
+                Console.WriteLine("Sonuç:" + carManager.DeleteById(carId).Message);
+            }
         }
     }
 }

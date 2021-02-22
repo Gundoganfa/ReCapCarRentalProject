@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class CarSalesPortalDBContext:DbContext //DBContext EntityFramework ile geliyor
+    public class CarRentalPortalDBContext:DbContext //DBContext EntityFramework ile geliyor
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

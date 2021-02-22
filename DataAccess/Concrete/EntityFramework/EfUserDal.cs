@@ -4,7 +4,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfUserDal:EfEntityRepositoryBase<User,CarSalesPortalDBContext>, IUserDal
+    public class EfUserDal:EfEntityRepositoryBase<User,CarRentalPortalDBContext>, IUserDal
     {
     }
 }

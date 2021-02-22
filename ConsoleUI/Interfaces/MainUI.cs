@@ -11,6 +11,7 @@ namespace ConsoleUI.Interfaces
             int command;
             IUserInterface brandUI = userInterfaces[0];
             IUserInterface carUI = userInterfaces[1];
+            IUserInterface userUI = userInterfaces[2];
 
             do
             {
@@ -19,8 +20,8 @@ namespace ConsoleUI.Interfaces
                 Console.WriteLine("2.Araba Operasyonları");
                 Console.WriteLine("3.Renk Operasyonları");
                 Console.WriteLine("4.Kullanıcı Operasyonları");
-                Console.WriteLine("4.Müşteri Operasyonları");
-                Console.WriteLine("4.Kiralama Operasyonları");
+                Console.WriteLine("5.Müşteri Operasyonları");
+                Console.WriteLine("6.Kiralama Operasyonları");
                 Console.WriteLine("0.Bye");
                 command = Convert.ToInt32(RequestDecimal());
                 switch (command)
@@ -31,6 +32,10 @@ namespace ConsoleUI.Interfaces
                     case 2:
                         carUI.Show();
                         break;
+                    case 4:
+                        userUI.Show();
+                        break;
+                    case 5:
                     default:
                         Console.WriteLine("Unsupported Request!");
                         break;

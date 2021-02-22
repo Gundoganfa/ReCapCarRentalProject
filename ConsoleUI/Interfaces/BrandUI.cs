@@ -35,39 +35,16 @@ namespace ConsoleUI.Interfaces
                 switch (command)
                 {
                     case 1:
-                        Console.Clear();
-                        Console.WriteLine("MARKA LISTESI");
-                        Console.WriteLine("#############\n");
-                        foreach (var item in brands)
-                        {
-                            Console.WriteLine(item.BrandId + " " + item.Name);
-                        }
+                        ListBrands(brands);
                         break;
                     case 2:
-                        Console.Clear();
-                        Console.WriteLine("MARKA EKLEME MENUSU");
-                        Console.WriteLine("###################\n"); 
-                        Console.WriteLine("Marka Adı:");
-                        brand.Name = Console.ReadLine();
-                        Console.WriteLine("Sonuç:" + brandManager.Add(brand).Message);
+                        AddBrand();
                         break;
                     case 3:
-                        Console.Clear();
-                        Console.WriteLine("MARKA DUZELTME MENUSU");
-                        Console.WriteLine("#####################\n");
-                        Console.WriteLine("Mevcut Marka Id'si:");
-                        brand.BrandId = Convert.ToInt32(RequestDecimal());
-                        Console.WriteLine("Güncellenmiş Marka Adı:");
-                        brand.Name = Console.ReadLine();
-                        Console.WriteLine("Sonuç:" + brandManager.Update(brand).Message);
+                        UpdateBrand();
                         break;
                     case 4:
-                        Console.Clear();
-                        Console.WriteLine("MARKA SİLME MENUSU");
-                        Console.WriteLine("###################\n");
-                        Console.WriteLine("Silinecek Marka Id'si:");
-                        brand.BrandId = Convert.ToInt32(RequestDecimal());
-                        Console.WriteLine("Sonuç:" + brandManager.DeleteById(brand.BrandId).Message);
+                        DeleteBrand();
                         break;
                     default:
                         Console.WriteLine("Unsupported Request!");
@@ -75,6 +52,51 @@ namespace ConsoleUI.Interfaces
                 }
 
             } while (command != 0);
+
+            void DeleteBrand()
+            {
+                Console.Clear();
+                Console.WriteLine("MARKA SİLME MENUSU");
+                Console.WriteLine("###################\n");
+                Console.WriteLine("Silinecek Marka Id'si:");
+                int brandId = Convert.ToInt32(RequestDecimal());
+                Console.WriteLine("Sonuç:" + brandManager.DeleteById(brandId).Message);
+            }
+
+            void UpdateBrand()
+            {
+                Console.Clear();
+                Console.WriteLine("MARKA DUZELTME MENUSU");
+                Console.WriteLine("#####################\n");
+                Console.WriteLine("Mevcut Marka Id'si:");
+                Brand brandToUpdate = new Brand();
+                brandToUpdate.BrandId = Convert.ToInt32(RequestDecimal());
+                Console.WriteLine("Güncellenmiş Marka Adı:");
+                brandToUpdate.Name = Console.ReadLine();
+                Console.WriteLine("Sonuç:" + brandManager.Update(brandToUpdate).Message);
+            }
+
+            void AddBrand()
+            {
+                Console.Clear();
+                Console.WriteLine("MARKA EKLEME MENUSU");
+                Console.WriteLine("###################\n");
+                Console.WriteLine("Marka Adı:");
+                Brand brandToAdd = new Brand();
+                brandToAdd.Name = Console.ReadLine();
+                Console.WriteLine("Sonuç:" + brandManager.Add(brandToAdd).Message);
+            }
+
+            static void ListBrands(List<Brand> brands)
+            {
+                Console.Clear();
+                Console.WriteLine("MARKA LISTESI");
+                Console.WriteLine("#############\n");
+                foreach (var item in brands)
+                {
+                    Console.WriteLine(item.BrandId + " " + item.Name);
+                }
+            }
         }
     }
 }
