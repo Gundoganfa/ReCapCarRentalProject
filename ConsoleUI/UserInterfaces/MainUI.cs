@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleUI.Interfaces
+namespace ConsoleUI.UserInterfaces
 {
     public class MainUI : UI, IUserInterface
     {
@@ -12,6 +12,8 @@ namespace ConsoleUI.Interfaces
             IUserInterface brandUI = userInterfaces[0];
             IUserInterface carUI = userInterfaces[1];
             IUserInterface userUI = userInterfaces[2];
+            IUserInterface customerUI = userInterfaces[3];
+            IUserInterface rentalUI = userInterfaces[4]; 
 
             do
             {
@@ -36,6 +38,11 @@ namespace ConsoleUI.Interfaces
                         userUI.Show();
                         break;
                     case 5:
+                        customerUI.Show();
+                        break;
+                    case 6:
+                        rentalUI.Show();
+                        break;
                     default:
                         Console.WriteLine("Unsupported Request!");
                         break;
@@ -43,8 +50,5 @@ namespace ConsoleUI.Interfaces
             } while (command != 0);
         }
 
-        public void Show()
-        {
-        }
     }
 }

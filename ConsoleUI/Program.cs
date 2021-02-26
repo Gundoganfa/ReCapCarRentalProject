@@ -1,5 +1,5 @@
 ﻿using Business.Concrete;
-using ConsoleUI.Interfaces;
+using ConsoleUI.UserInterfaces;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
@@ -20,8 +20,11 @@ namespace ConsoleUI
             BrandUI brandUI = new BrandUI();
             CarUI carUI = new CarUI();
             UserUI userUI = new UserUI();
+            CustomerUI customerUI = new CustomerUI();
+            RentalUI rentalUI = new RentalUI();
 
-            List<IUserInterface> userInterfaces = new List<IUserInterface> { brandUI, carUI, userUI };
+
+            List<IUserInterface> userInterfaces = new List<IUserInterface> { brandUI, carUI, userUI, customerUI, rentalUI };
 
             mainUI.Show(userInterfaces);
         }                

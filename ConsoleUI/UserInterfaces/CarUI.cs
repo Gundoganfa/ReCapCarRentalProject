@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleUI.Interfaces
+namespace ConsoleUI.UserInterfaces
 {
     public class CarUI : UI, IUserInterface
     {

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleUI.Interfaces
+namespace ConsoleUI.UserInterfaces
 {
     public class UserUI: UI, IUserInterface
     {
@@ -74,11 +74,11 @@ namespace ConsoleUI.Interfaces
         static void ListUsers(List<User> users)
         {
             Console.Clear();
-            Console.WriteLine("MARKA LISTESI");
+            Console.WriteLine("KULLANICI LISTESI");
             Console.WriteLine("#############\n");
             foreach (var item in users)
             {
-                Console.WriteLine("userID:"+item.UserId +"Ad:\t" +item.Name + "Soyad:\t" + item.LastName + "Email:\t " +item.Email + "Password:\t"+item.Password);
+                Console.WriteLine("userID: "+item.UserId + "\tAd: " + item.Name + "\tSoyad: " + item.LastName + "\tEmail: " + item.Email);
             }
         }
     }
