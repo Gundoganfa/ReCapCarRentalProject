@@ -94,7 +94,7 @@ namespace ConsoleUI.UserInterfaces
                     RentalDetailDto rentalDetail = new RentalDetailDto();
                     rentalDetail = rentalDetails.SingleOrDefault(r => r.RentalId == id);
 
-                    decimal borc = rentalDetail.DailyPrice * CountDays(rentalDetail.RentDate, rentalDetail.ReturnDate);
+                    decimal borc = rentalDetail.DailyPrice * CountDays(rentalDetail.RentDate, (DateTime)rentalDetail.ReturnDate);
                     Console.Clear();
                     Console.WriteLine("Borcunuz: ", borc);
 
