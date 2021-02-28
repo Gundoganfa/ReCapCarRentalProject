@@ -2,10 +2,13 @@
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Business.Validation.FluentValidation;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
+using FluentValidation;
 
 namespace Business.DependencyResolvers.Autofac
 {

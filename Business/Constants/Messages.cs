@@ -13,5 +13,6 @@ namespace Business.Constants
         public static string UpdateSuccess = "Update Başarılı";
         public static string UpdateError = "Hata : Update";
         public static string ProductsListed = "Ürün Listeleme Başarılı";
+        public static string rentalValidation = "Kiralama Bilgisinde Hata Var";
     }
 }

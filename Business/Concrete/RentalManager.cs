@@ -1,8 +1,11 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Business.Validation.FluentValidation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 
@@ -11,15 +14,23 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         IRentalDal _rentalDal;
+        RentalValidator _rentalValidator;
 
         public RentalManager(IRentalDal rentalDal)
         {
             _rentalDal = rentalDal;
+            _rentalValidator = new RentalValidator();
         }
 
         public IResult Add(Rental rental)
         {
             Rental searchItem = new Rental();
+
+            var validationResult = _rentalValidator.Validate(rental);
+            if (!validationResult.IsValid)
+            {
+                return new ErrorResult(Messages.rentalValidation);
+            }
 
             searchItem = _rentalDal.Get(r => r.CarId == rental.CarId);
             if ((searchItem==null) || (searchItem.ReturnDate != null))
