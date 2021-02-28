@@ -13,21 +13,22 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (CarRentalPortalDBContext context = new CarRentalPortalDBContext())
             {
+                System.Console.WriteLine("yaziyor");
                 var result = from rental in context.Rentals
-                             join customer in context.Customers on rental.CustomerId equals customer.CustomerId
-                             join user in context.Users on customer.UserId equals user.UserId
                              join car in context.Cars on rental.CarId equals car.CarId
+
                              select new RentalDetailDto
                              {
                                  RentalId = rental.RentalId,
                                  CarId = rental.CarId,
-                                 CustomerId = customer.CustomerId,
-                                 CustomerName = user.Name,
-                                 CustomerSurname = user.LastName,
-                                 DailyPrice = car.DailyPrice,
+                                 CustomerId = rental.CustomerId,
                                  RentDate = rental.RentDate,
-                                 ReturnDate = rental.ReturnDate
+                                 ReturnDate = rental.ReturnDate,
+                                 DailyPrice = car.DailyPrice
+                                 //CustomerName = user.Name,
+                                 //CustomerSurname = user.LastName
                              };
+
                 return result.ToList();
             }
         }
