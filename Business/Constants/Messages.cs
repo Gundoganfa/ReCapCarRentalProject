@@ -14,5 +14,8 @@ namespace Business.Constants
         public static string UpdateError = "Hata : Update";
         public static string ProductsListed = "Ürün Listeleme Başarılı";
         public static string rentalValidation = "Kiralama Bilgisinde Hata Var";
+        public static string ImagesListed = "Imajlar Listelendi";
+        public static string ImageCapacityForACarReached = "Bir arabaya eklenebilecek resim sayısı aşıldı";
+        
     }
 }
